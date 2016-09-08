@@ -75,6 +75,8 @@
       text-decoration:none;
       text-shadow:0px 1px 0px #154682;
     }
+
+
     .myButton:hover {
       background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
       background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
@@ -106,8 +108,9 @@
     <form method="post">
       <fieldset >
         <legend>Can you make it Wednesday Sep 23rd?</legend>
-        <input id='yes' type="radio" name="games" value="yes" /><span class='gametext'>Yes</span><br />
-        <input  type="radio" name="games" value="no" /><span class='gametext'>No</span><br />
+        <a href="#" class="myButton" id="yes">Yes</a>
+        <a href="#" class="myButton" id="no">No</a>
+        <a href="#" class="myButton" id="maybe">Maybe</a>
       </fieldset>
       <br><br>
 
@@ -127,15 +130,33 @@
 
     <script type="text/javascript">
 
-    // BUG:
+    function showVotes () {
+      
+    }
+
+    function handleYesSelected () {
+      alert('you picked yes!!')
+    }
+
+    function handleNoSelected () {
+      alert('you picked no!!')
+    }
+
+    function handleMaybeSelected () {
+      alert('you picked maybe!!')
+    }
+
+    $('#yes').click(function () {
+      handleYesSelected();
+    });
+
+    $('#no').click(function () {
+      handleNoSelected();
+    });
+    
     document.getElementById("chooseGames").style.visibility = "hidden";
 
 
-    if(document.getElementById('yes').checked){
-      console.log('this worked');
-    } else {
-      document.getElementById("chooseGames").style.visibility = "hidden";
-    }
     // BUG:
 
 
