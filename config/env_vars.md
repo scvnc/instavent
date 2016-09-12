@@ -1,0 +1,1 @@
+AZURE_STORAGE_CONNECTION_STRING='DefaultEndpointsProtocol=https;AccountName=yyy;AccountKey=xxx'
