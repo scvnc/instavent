@@ -13,7 +13,8 @@ const
 
   nunjucks.configure(path.resolve(__dirname, 'static'), {
     autoescape: true,
-    express: app
+    express: app,
+    noCache: true
   });
 
   app.use(express.static(path.resolve(__dirname, 'static')));
@@ -21,6 +22,8 @@ const
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended:false}));
+
+
 
   //
   //// Routes
@@ -39,16 +42,44 @@ const
     // This is the information from the form.
     let {eventtitle, date, owneremail, Games, participants} = req.body;
 
+    let parsedParticipants = (participants.match(/[^\r\n]+/g) || [])
+      .map(p => {
 
-    res.send(req.body);
+        const [name, email] = p.split(" ");
 
+        return {
+          name, 
+          email, 
+          inviteCode: uuid.v4(), 
+          response: null
+        }
+      });
 
+    let event = {
+      id: uuid.v1(),
+      title: eventtitle,
+      date,
+      ownerEmail: owneremail,
+      games: Games.match(/[^\r\n]+/g) || [],
+      participants: parsedParticipants
+    };
+
+    storage.put(event.id, event)
+      .then(() => res.redirect(`/event/${event.id}`))
+      .catch(e => res.status(500).send(e.toString()));
     
+  });
 
+  app.get('/event/:id', (req, res) => {
+
+    storage.get(req.params.id)
+      .then(data => {
+        res.render('results.html', data);
+      })
+      .catch(() => res.sendStatus(404));
 
   });
 
-  app.get('/event/:id')
 
   app.get('/invite/:id', (req, res) => {
     let {id} = req.params;

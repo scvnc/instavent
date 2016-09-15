@@ -11,8 +11,10 @@ function getTableSvc () {
   if (tableSvcPromise != null) {
     return tableSvcPromise;
   }
+  
 
   tableSvcPromise = new Promise ((res, rej) => {
+    
     var tableSvc = azure.createTableService();
 
     tableSvc.createTableIfNotExists(TABLE_NAME, error => {
@@ -29,7 +31,8 @@ function getTableSvc () {
 }
 
 function put (id, object) {
-
+        
+    
   const entity = {
     PartitionKey: entGen.String(PARTITION_NAME),
     RowKey: entGen.String(id),
@@ -38,14 +41,15 @@ function put (id, object) {
 
   return getTableSvc()
     .then(tableSvc => new Promise((res, rej) => {
-
+      
       tableSvc.insertOrReplaceEntity(TABLE_NAME, entity, function (error) {
         
         if (error) {
+          
           return rej(error);
         }
         
-        return res(error);
+        return res();
       });
 
     }));
