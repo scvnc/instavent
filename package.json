@@ -4,6 +4,7 @@
   "description": "Lightweight Event Invitation",
   "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
     "test": "mocha -w tests"
   },
   "repository": {
@@ -28,10 +29,13 @@
     "azure-storage": "^1.3.0",
     "azureleveldown": "0.0.3",
     "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
     "express": "^4.14.0",
+    "jquery": "^3.1.0",
     "levelup": "^1.3.2",
     "node-uuid": "^1.4.7",
-    "nunjucks": "^2.5.0"
+    "nunjucks": "^2.5.0",
+    "pickadate": "^3.5.6"
   },
   "devDependencies": {
     "chai": "^3.5.0",
