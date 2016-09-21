@@ -23,6 +23,10 @@
     body{
       padding:0;
       margin:0;
+      background-image: url('https://images.alphacoders.com/464/464155.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: auto;
       background-color: #2d4671;
     }
 
@@ -32,7 +36,7 @@
       text-align: center;
     }
 
-    h2 {
+  div >  h1 {
       color:white;
       font-family: 'Prompt', sans-serif;
       text-align: center;
@@ -101,21 +105,24 @@
     <hr>
 
     <div>
-      <h2> Hey Sam! We want to find out what you want to play and when! </h2>
-    </div>q
+      <h1> Hey {{ user }} ! We want to find out what you want to play and when! </h1>
+    </div>
     <br><br><br><br>
 
     <form method="post">
-      <fieldset >
-        <legend>Can you make it Wednesday Sep 23rd?</legend>
+      <fieldset style="background-color: #2d4671;" >
+        <legend>Can you make it <!--{{ date }} --> Wednesday Sep 23rd?</legend>
         <a href="#" class="myButton" id="yes">Yes</a>
         <a href="#" class="myButton" id="no">No</a>
         <a href="#" class="myButton" id="maybe">Maybe</a>
       </fieldset>
       <br><br>
 
-      <fieldset id='chooseGames'>
-        <legend> Which game(s) would you be intrested in playing </legend>
+
+<!-- DO WE NEED A {{ GAMES }} HERE -->
+
+      <fieldset style="background-color: #2d4671" id='chooseGames'>
+        <legend style="font-size:15px"> Which game(s) would you be intrested in playing </legend>
         <input type="checkbox" name="favorite1" value="unreal" /> <span class='gametext'>Unreal Tournament 2004</span>
         <input type="checkbox" name="favorite2" value="soldat" /> <span class='gametext'>Soldat</span>
         <input type="checkbox" name="favorite3" value="starcraft" /><span class='gametext'> StarCraft </span>
@@ -159,11 +166,7 @@
     document.getElementById("chooseGames").style.visibility = "hidden";
 
 
-    // BUG:
-
-
-
-    /*
+    /*s
     var allRadios = document.getElementsByName('games');
     var booRadio;
     var x = 0;
