@@ -8,10 +8,14 @@
 
 <style>
 
+#choice{
+  text-align: center;
+}
+
 @font-face {
   font-family: 'yoster_islandregular';
-  src: url('yoster-webfont.woff2') format('woff2'),
-  url('yoster-webfont.woff') format('woff');
+  src: url('/yoster-webfont.woff2') format('woff2'),
+  url('/yoster-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 
@@ -61,24 +65,50 @@ table, td, th {
 </head>
 <body>
 
-<heading> <h1> {{title}} </h1></heading>
+
 <hr>
 
 <br>
+
 <h2 id='whocanplay'>
-  Hey everyone! Here are the results for who can play on {{date}}! Check it out! </h2>
+
+  <font color="white">Would you be interested in...</font>
+<heading> <h1> {{title}} </h1></heading>
+
+  on {{date}} ??
+</h2>
+
+<div id="choice">
+  <button>yes</button>
+  <button>no</button>
+</div>
   
-<!--YES NO MAYBE RESULTS --> <table style="width:100%; color:white">
+<!--YES NO MAYBE RESULTS --> 
+<table style="width:100%; color:white">
   <tr class='result'>
     <th style='color:lightgreen'>YES</th>
     <th style='color:red'>NO</th>
-    <th style='color:yellow'>MAYBE</th>
+    <th style='color:yellow'>NO RESPONSE</th>
   </tr>
   <br>
   <tr class='result'>
-    <td>7</td>
-    <td>5</td>
-    <td>13</td>
+    <td>
+      {% for invite in confirmed %}
+        <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+      {% endfor %}
+    </td>
+    <td>
+      
+    {% for invite in declined %}
+      <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+    {% endfor %}
+      
+    </td>
+    <td>
+      {% for invite in unknown %}
+        <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+      {% endfor %}
+    </td>
   </tr>
 </table>
 

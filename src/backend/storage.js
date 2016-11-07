@@ -63,7 +63,7 @@ function get (id) {
 
       tableSvc
         .retrieveEntity(TABLE_NAME, PARTITION_NAME, id, (error, result) => {
-
+          
           if (error) {
             return rej(error)
           }
