@@ -1,21 +1,21 @@
 // @flow
 
-import path from 'path'; 
-
-import gravatar from 'gravatar';
-
-import uuid from 'node-uuid';
-import storage from './storage.js';
-
 import Koa from 'koa';
 import Router from 'koa-router';
 import views from 'koa-views';
 import serveStatic from 'koa-static';
 import bodyParser from 'koa-bodyparser';
 
-const STATIC_DIR = path.resolve(__dirname, '..', 'static');
+import path from 'path'; 
+import gravatar from 'gravatar';
+import uuid from 'node-uuid';
+import storage from './storage.js';
+import nunjucks from 'nunjucks';
 
 const 
+
+  STATIC_DIR = path.resolve(__dirname, '..', 'static'),
+
   app = new Koa(),
   router = new Router();
 
@@ -23,13 +23,10 @@ const
 app.use(views(STATIC_DIR, {
   map: { html: 'nunjucks' },
   options: {
-    noCache: true
+    nunjucksEnv: nunjucks.configure(STATIC_DIR, {noCache: true})
   }
 }));
 
-// Static files
-app.use(serveStatic(STATIC_DIR));
-router.use('/node_modules', serveStatic(path.resolve(__dirname, '..', 'node_modules')));
 
 app.use(bodyParser());
 
@@ -81,8 +78,10 @@ router.post('/event', async (ctx) => {
 
 router.get('/event/:id', async ctx => {
 
-  let data: Event = await storage.get(ctx.params.id);
-  
+  let {inviteCode} = ctx.query;
+  let {id} = ctx.params;
+  let data: Event = await storage.get(id);
+
   const {participants, date, title} = data;
   
   let participantVMs = participants.map(p => {
@@ -92,6 +91,9 @@ router.get('/event/:id', async ctx => {
   });
 
   let vm : ResultsViewModel = {
+
+    eventId: id,
+    inviteCode,
 
     title,
     date,
@@ -104,17 +106,25 @@ router.get('/event/:id', async ctx => {
   await ctx.render('results.html', vm);
 });
 
-router.put('/invite/:id', (req, res) => {
 
-  let
-    {id} = req.params,
-    {body} = req;
-  
-  storage.put(id, body)
-    .then(() => res.sendStatus(200))
-    .catch((err) => {console.log(err);res.sendStatus(500)});
+router.post('/event/:id/participant/:inviteCode/response', async ctx => {
+ 
+  let data : Event = await storage.get(ctx.params.id);
+
+  let idx = data.participants
+    .findIndex(p => p.inviteCode === ctx.params.inviteCode);
+    
+  data.participants[idx].response = 'y';
   
 });
 
+
+// Static files
+app.use(serveStatic(STATIC_DIR, {index: 'null'}));
+router.use('/node_modules', serveStatic(path.resolve(__dirname, '..', 'node_modules')));
+
 app.use(router.routes());
-app.listen(3000);
+
+
+
+export default app;

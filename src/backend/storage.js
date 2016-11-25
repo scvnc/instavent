@@ -30,8 +30,8 @@ function getTableSvc () {
   return tableSvcPromise;
 }
 
+// Todo etag concurrency https://azure.microsoft.com/en-us/documentation/articles/storage-nodejs-how-to-use-table-storage/#add-an-entity-to-a-table
 function put (id, object) {
-        
     
   const entity = {
     PartitionKey: entGen.String(PARTITION_NAME),
@@ -45,7 +45,6 @@ function put (id, object) {
       tableSvc.insertOrReplaceEntity(TABLE_NAME, entity, function (error) {
         
         if (error) {
-          
           return rej(error);
         }
         

@@ -1,3 +1,5 @@
 require('babel-register');
-require('./app.js');
 
+let app = require('./app.js');
+
+app.default.listen(3000);

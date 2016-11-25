@@ -28,9 +28,14 @@ type InviteVM = Invite & {
 }
 
 type ResultsViewModel = {
+
+  eventId: string,
+  inviteCode: ?string,
+
   title: string,
   date: string,
 
   confirmed: Array<InviteVM>,
-  declined: Array<InviteVM>
+  declined: Array<InviteVM>,
+  unknown: Array<InviteVM>
 }
