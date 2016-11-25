@@ -29,7 +29,7 @@
 }
 
 .container{
-  margin-top: 2em;
+  margin-top: 1em;
   background-color: #ffffff;
   z-index: 666666;
   height:110%;
@@ -109,14 +109,18 @@ body{
 /* xs < 768 */
 @media screen and (max-width: 767px) {
   body {
-    font-size: 4em;
+    font-size: 2em;
+  }
+
+  .heading{
+    font-size: 1em;
   }
 }
 
 /* sm */
 @media screen and (min-width: 768px) {
   body {
-    font-size: 3.64em;
+    font-size: 1.64em;
   }
 
   .myButton {
@@ -130,16 +134,20 @@ body{
   body {
     font-size: 2em;
   }
+
+  .container{
+    width:40em;
+  }
 }
 
 /* lg */
 @media screen and (min-width: 1200px) {
   body {
-    font-size: 6em;
+    font-size: 2em;
   }
 
   .container{
-    width: 30em;
+    width:40em;
   }
 
   .heading{
@@ -153,8 +161,8 @@ body{
   <div class='container'>
 
     <div class='row'>
-      <div class='col-sm-12 col-xs-4'>
-        <h1 style='font-size:2em' class='heading'> Instavent </h1>
+      <div class='col-sm-12 '>
+        <h1 style='font-size:40px' class='heading'> Instavent </h1>
         <h4 class='heading'> Create An Event </h4>
         <hr>
       </div>
