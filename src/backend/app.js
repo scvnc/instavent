@@ -6,13 +6,13 @@ import views from 'koa-views';
 import serveStatic from 'koa-static';
 import bodyParser from 'koa-bodyparser';
 
-import path from 'path'; 
+import path from 'path';
 import gravatar from 'gravatar';
 import uuid from 'node-uuid';
 import storage from './storage.js';
 import nunjucks from 'nunjucks';
 
-const 
+const
 
   STATIC_DIR = path.resolve(__dirname, '..', 'static'),
 
@@ -44,7 +44,7 @@ router.get('/create-event-form', async (ctx) => {
 
 router.post('/event', async (ctx) => {
 
-  const {eventtitle, date, 
+  const {eventtitle, date,
     owneremail, Games, participants} = (ctx.request.body : CreateEventDTO);
 
   let parsedParticipants : Array<Invite> = (participants.match(/[^\r\n]+/g) || [])
@@ -53,12 +53,12 @@ router.post('/event', async (ctx) => {
       const [name, email] = p.split(" ");
 
       return {
-        name, 
-        email, 
-        inviteCode: uuid.v4(), 
+        name,
+        email,
+        inviteCode: uuid.v4(),
         response: '?'
       };
-      
+
     });
 
   let event : Event = {
@@ -71,7 +71,7 @@ router.post('/event', async (ctx) => {
   };
 
   await storage.put(event.id, event)
-  
+
   ctx.response.redirect(`/event/${event.id}`);
 
 });
@@ -83,7 +83,7 @@ router.get('/event/:id', async ctx => {
   let data: Event = await storage.get(id);
 
   const {participants, date, title} = data;
-  
+
   let participantVMs = participants.map(p => {
     return Object.assign({}, p, {
       imgUrl: gravatar.url(p.email)
@@ -97,25 +97,25 @@ router.get('/event/:id', async ctx => {
 
     title,
     date,
-    
+
     confirmed: participantVMs.filter(p => p.response === 'y'),
     declined: participantVMs.filter(p => p.response === 'n'),
     unknown: participantVMs.filter(p => p.response === '?')
   };
 
-  await ctx.render('results.html', vm);
+  await ctx.render('results2.html', vm);
 });
 
 
 router.post('/event/:id/participant/:inviteCode/response', async ctx => {
- 
+
   let data : Event = await storage.get(ctx.params.id);
 
   let idx = data.participants
     .findIndex(p => p.inviteCode === ctx.params.inviteCode);
-    
+
   data.participants[idx].response = 'y';
-  
+
 });
 
 

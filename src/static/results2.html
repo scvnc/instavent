@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+Create Game Event
+{% endblock %}
+
+<!-- title is being grabbed from EventTitle on first page  -->
+{% block header %} {{title}} {% endblock %}
+{% block pageheader %} RESULTS {% endblock %}
+
+{% block content %}
+
+<font color="white">Would you be interested in...</font>
+<heading> <h1> {{title}} </h1></heading>
+
+on {{date}} ??
+</h2>
+
+{{unknown.length}} have not responded
+{% for invite in unknown %}
+{{invite.inviteCode}}
+  {{invite.name}} was invited and they have responded {{invite.response}}
+{% endfor %}
+
+<table style="width:100%; color:white">
+  <tr class='result'>
+    <th style='color:lightgreen'>YES</th>
+    <th style='color:red'>NO</th>
+    <th style='color:yellow'>NO RESPONSE</th>
+  </tr>
+  <br>
+  <tr class='result'>
+    <td>
+      {% for invite in confirmed %}
+        <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+      {% endfor %}
+    </td>
+    <td>
+
+    {% for invite in declined %}
+      <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+    {% endfor %}
+
+    </td>
+    <td>
+      {% for invite in unknown %}
+        <img src="{{invite.imgUrl}}" alt="{{invite.name}}" />
+      {% endfor %}
+    </td>
+  </tr>
+</table>
+ {% endblock %}

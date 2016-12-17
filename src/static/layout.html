@@ -161,72 +161,14 @@ body{
   <div class='container'>
 
     <div class='row'>
-      <div class='col-sm-12 '>
-        <h1 style='font-size:40px' class='heading'> Instavent </h1>
-        <h4 class='heading'> Create An Event </h4>
+      <div class='col-sm-12'>
+        <h1 style='font-size:40px' class='heading'> {% block header %} {% endblock %} </h1>
+        <h4 class='heading'> {% block pageheader %} {% endblock %} </h4>
         <hr>
       </div>
     </div>
 
-    <div class='formOutline'>
-
-      <form action="/event" method="post" id="GamingForm">
-
-        <div class='row'>
-          <div class='col-sm-12'>
-            <label class='titles'for='event-title'> Event Title <span style='color:red'>* </span> :</label>
-            <br>
-            <input class='eventTitleBox' type="text" name="eventtitle" required="required">
-          </div>
-        </div>
-        <br>
-
-        <div class='row'>
-          <div class='col-sm-12'>
-            <!--EMAIL--> <label class='titles' for='event-title'> Email: <span style='color:red'>* </span> :</label>
-            <br>
-            <input class='eventTitleBox' type="text" name="email" required="required">
-          </div>
-        </div>
-        <br>
-
-
-        <div class='row'>
-          <div class='col-sm-12'>
-            <!--DATE-->  <label class='titles' > Date: </label>
-            <br>
-            <section class="section">
-              <fieldset>
-                <input
-                id="input_01"
-                class='eventTitleBox'
-                class="datepicker"
-                name="date"
-                type="text"
-                autofocuss
-
-              </fieldset>
-              <div id="container"></div>
-            </section>
-          </div>
-        </div>
-        <br>
-
-
-        <!-- OR DO WE NEED A {{ GAMES }} HERE OR IS THAT GETTING USED WHERE THE GAMES ARE ACTAULLY BEING STORED
-        ON THE NEXT PAGE -->
-        <!--GAMES--> <textarea rows="4" cols="25" name="Games" form="GamingForm" placeholder="Games"></textarea><br>
-        <br>
-        <!--PARTICIPANTS--><textarea rows="4" cols="25" name="participants" form="GamingForm" placeholder="Participants"></textarea>
-        <br>
-        <!--SUBMIT--><input class='myButton' form='GamingForm'  type='submit' value='Submit'>
-        <br>
-
-
-      </form>
-      <br>
-    </div>
-
+{% block content%} {%endblock%}
     <br>
   </div>
 

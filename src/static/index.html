@@ -1,81 +1,70 @@
 {% extends "layout.html" %}
 {% block title %}
-wooooo
+Create Game Event
 {% endblock %}
-{{hi}}
+{% block header %} RESULTS {% endblock %}
 
 
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Create Event Game </title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <!-- Latest compiled and minified JavaScript -->
-  <link rel='stylesheet' type='text/css' href='style.css'>
-  <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="default.css">
-  <link rel="stylesheet" href="default.date.css">
-</head>
-<body>
 
-  <h1 id='heading'> Create An Event </h1>
-  <hr>
+{% block pageheader %} Hello Vince {% endblock %}
 
-<div class='formbox'>
-  <!---------------------------------------------------------------------------->
-  <!--BEGINNING OF FORM -------------------------------------------------------->
-  <form action="/event" method="post" id="GamingForm">
+{% block content%}
+    <div class='formOutline'>
 
-    <!--EVENT TITLE--> <h3 class='headertext'> Event Title<span style='color:red'>* </span> :</h3>
-    <input type="text" name="eventtitle" required="required"><br>
+      <form action="/event" method="post" id="GamingForm">
 
-    <!--DATE--><h3 class='headertext'>Date:</h3>
-    <section class="section">
-      <fieldset>
-        <input
-        id="input_01"
-        class="datepicker"
-        name="date"
-        type="text"
-        autofocuss
+        <div class='row'>
+          <div class='col-sm-12'>
+            <label class='titles'for='event-title'> Event Title <span style='color:red'>* </span> :</label>
+            <br>
+            <input class='eventTitleBox' type="text" name="eventtitle" required="required">
+          </div>
+        </div>
+        <br>
 
-      </fieldset>
-      <div id="container"></div>
-    </section>
-
-    <!--OWNERS EMAIL-->  <h3 class='headertext' > Owner's Email: </h3>
-    <input type="text" name="owneremail" required="required"><br>
-    <br>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <!--EMAIL--> <label class='titles' for='event-title'> Email: <span style='color:red'>* </span> :</label>
+            <br>
+            <input class='eventTitleBox' type="text" name="email" required="required">
+          </div>
+        </div>
+        <br>
 
 
-<!-- OR DO WE NEED A {{ GAMES }} HERE OR IS THAT GETTING USED WHERE THE GAMES ARE ACTAULLY BEING STORED
-     ON THE NEXT PAGE -->
-    <!--GAMES--> <textarea rows="4" cols="18" name="Games" form="GamingForm" placeholder="Games"></textarea><br>
-    <br>
-    <!--PARTICIPANTS--><textarea rows="4" cols="18" name="participants" form="GamingForm" placeholder="Participants"></textarea>
-    <br>
-    <!--SUBMIT--><input class='myButton' form='GamingForm'  type='submit' value='Submit'>
-    <br>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <!--DATE-->  <label class='titles' > Date: </label>
+            <br>
+            <section class="section">
+              <fieldset>
+                <input
+                id="input_01"
+                class='eventTitleBox'
+                class="datepicker"
+                name="date"
+                type="text"
+                autofocuss
 
-  </form>
-  <!--END OF FORM---------------------------------------------------------------->
-  <!----------------------------------------------------------------------------->
-</div>
+              </fieldset>
+              <div id="container"></div>
+            </section>
+          </div>
+        </div>
+        <br>
 
-  <!-- WHATS THE PHOTO FOR ------>
-  <!--<a href='http://pnmedia.gamespy.com/planetunreal.gamespy.com/newsimages/ut3bp1/face3.jpg'>
-  <p style='color:lightblue'>Unreal Tournament 2004 Battle Royal! </p>
-</a>
-<!------------------------------->
 
-<script src="jquery.1.7.0.js"></script>
-<script src="picker.js"></script>
-<script src="picker.date.js"></script>
-<script src="legacy.js"></script>
-<script type="text/javascript" src='event.js'></script>
-</body>
-</html>
+        <!-- OR DO WE NEED A {{ GAMES }} HERE OR IS THAT GETTING USED WHERE THE GAMES ARE ACTAULLY BEING STORED
+        ON THE NEXT PAGE -->
+        <!--GAMES--> <textarea rows="4" cols="25" name="Games" form="GamingForm" placeholder="Games"></textarea><br>
+        <br>
+        <!--PARTICIPANTS--><textarea rows="4" cols="25" name="participants" form="GamingForm" placeholder="Participants"></textarea>
+        <br>
+        <!--SUBMIT--><input class='myButton' form='GamingForm'  type='submit' value='Submit'>
+        <br>
+
+
+      </form>
+      <br>
+    </div>
+{%endblock%}
